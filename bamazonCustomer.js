@@ -1,5 +1,7 @@
 var mysql = require("mysql")
 var inq = require("inquirer")
+var cTable = require('console.table')
+
 var config = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -36,12 +38,9 @@ function userPurchase() {
     config.query(query, function (e, r) {
         if (e) throw e
 
-        console.log("============= Bamazon Items =============")
-        for (var key in r) {
-            let k = r[key]
-            console.log("ID " + k.id + " : " + k.product_name + " | Department: " + k.department_name + " | Price: $" + k.price + " | Inventory: " + k.stock_quantity)
-        }
-        console.log("=========================================")
+        console.log("==================== Bamazon Items ===================")
+        console.table(r)
+
         prompt(qs).then(function (user) {
             var existItem
             var stock_quantity = parseInt(stock_quantity)
@@ -72,6 +71,12 @@ function userPurchase() {
                     console.log("Enjoy your purchase!")
                     config.end()
                 })
+                // updateProfits = 'ALTER TABLE department ADD product_sales INTEGER(11); INSERT INTO department SET product_sales =' + (user.quantity * r[user.itemID - 1].price) + 'WHERE id =' + (user.itemID)
+
+                // config.query(updateProfits, function (e, r) {
+                //     if (e) throw e
+                //     config.end()
+                // })
             }
         })
     })
