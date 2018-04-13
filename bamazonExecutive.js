@@ -33,7 +33,7 @@ var qsAddDept = [
 
 prompt(qsExec).then(function (r) {
     switch (r.superviser) {
-        case 'View Products Sales By Department':
+        case 'View Product Sales By Department':
             ViewProductSalesByDepartment()
             break
         case 'Create New Department':
@@ -47,14 +47,17 @@ config.connect(function (e) {
     if (e) throw e
 })
 
-// function ViewProductSalesByDepartment() {
-//     config.query(query, function (e, r) {
-//         if (e) throw e
-//         console.log("============= Product Sales by Department =============")
-//         console.table(departments)
-//         config.end()
-//     })
-// }
+function ViewProductSalesByDepartment() {
+    query = `
+    SELECT * FROM departments;
+    `
+    config.query(query, function (e, r) {
+        if (e) throw e
+        console.log("========= Product Sales by Department =========")
+        console.table(r)
+        config.end()
+    })
+}
 
 function CreateDepartment() {
     prompt(qsAddDept).then(function (newDept) {
