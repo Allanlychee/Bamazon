@@ -121,12 +121,12 @@ function AddProduct() {
     config.query(query, function (e, r) {
         if (e) throw e
         prompt(qsAddProd).then(function (newProd) {
-        
+
             var newData = {
-                    product_name : newProd.product,
-                    department_name : newProd.department,
-                    price : newProd.price,
-                    stock_quantity : newProd.inventory
+                product_name: newProd.product,
+                department_name: newProd.department,
+                price: newProd.price,
+                stock_quantity: newProd.inventory
             }
             updateProd = 'INSERT INTO products SET ?'
             config.query(updateProd, newData, function (e, r) {

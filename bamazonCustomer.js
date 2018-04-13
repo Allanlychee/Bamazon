@@ -59,14 +59,14 @@ function userPurchase() {
                 console.log("=============================")
                 userPurchase()
 
-            } else if (r[user.itemID-1].stock_quantity <= user.quantity) {
+            } else if (r[user.itemID - 1].stock_quantity <= user.quantity) {
                 console.log("=============================")
                 console.log("Insufficient Quantity! Please try again.")
                 console.log("=============================")
                 userPurchase()
-                
-            } else if (r[user.itemID-1].stock_quantity >= user.quantity) {
-                updateStock = 'UPDATE products SET stock_quantity =' + (r[user.itemID-1].stock_quantity - user.quantity) + ' WHERE id = ' + (user.itemID)
+
+            } else if (r[user.itemID - 1].stock_quantity >= user.quantity) {
+                updateStock = 'UPDATE products SET stock_quantity =' + (r[user.itemID - 1].stock_quantity - user.quantity) + ' WHERE id = ' + (user.itemID)
                 config.query(updateStock, function (e, r) {
                     if (e) throw e
                     console.log("Enjoy your purchase!")
